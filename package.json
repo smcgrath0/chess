@@ -1,0 +1,31 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node .",
+    "dev": "npm-run-all --silent --parallel watch client",
+    "watch": "nodemon ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smcgrath0/chess.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smcgrath0/chess/issues"
+  },
+  "homepage": "https://github.com/smcgrath0/chess#readme",
+  "dependencies": {
+    "nodemon": "^2.0.4",
+    "npm-run-all": "4.1.5"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "pg": "^8.3.0"
+  }
+}

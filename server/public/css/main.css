@@ -14,6 +14,7 @@
 .col {
   width: 12.5%;
   height: 100%;
+  position: relative;
 }
 
 .row:nth-of-type(2n) .col:nth-of-type(2n) {
@@ -42,6 +43,15 @@
   align-items: center;
 }
 
+[class^="white"] > span,
+[class^="black"] > span {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
 [class^="white"] {
   height: 80%;
   width: 80%;

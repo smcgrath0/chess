@@ -10,9 +10,124 @@ function bishop() {
 function knight() {
 
 }
-function rook(element) {
-  element;
+function setUpRook() {
+  var r = document.querySelectorAll("[class$='rook']");
+  for (let i = 0; i < r.length; i++) {
+    r.item(i).children[0].addEventListener("click", (firstEvent) => {
+      let xCord, yCord, type;
+      firstEvent.target.parentNode.parentNode.classList.forEach((value) => {
+        if (value[1] == "-") {
+          yCord = value[0];
+          xCord = value[2];
+        }
+      });
 
+      var array = [];
+      var gameBoard = document.querySelector(".gameContainer");
+      if (firstEvent.target.parentNode.classList.contains("black-rook")) {
+        for (let j = 1; j < 9; ++j) {
+          console.log(yCord + '-' + j);
+          var tile = firstEvent.target.parentNode.parentNode.parentNode.parentNode.querySelector('.' + yCord + '-' + j);
+          if (tile.length > 0 && tile.classList.contains(yCord + '-' + xCord)) {
+            tile = null;
+          }
+          if (tile) {
+            array.push(tile);
+          }
+        }
+        console.log(firstEvent.target.parentNode.parentNode.getElementsByClassName(yCord + '-8'));
+        console.log(gameBoard.querySelectorAll('*[class^="C-"]'));
+        let availSpace = firstEvent.target.parentNode.parentNode.parentNode.parentNode.querySelectorAll('[class$="' + xCord + '"]');
+        array = availSpace.map( space => {
+          console.log('space rook',space);
+          if (space.children.length) {
+            console.log('space rook has children');
+          }
+          return space;
+        })
+        availSpace = firstEvent.target.parentNode.parentNode.parentNode.parentNode.querySelectorAll(`[class^="${yCord}"]`);
+        availSpace.map( space => {
+          array.push(space);
+          return null;
+        })
+
+        // if (yCord === "B") {
+        //   array.push(
+        //     firstEvent.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName(
+        //       String.fromCharCode(yCord.charCodeAt(0) + 2) + "-" + xCord
+        //     )[0]
+        //   );
+        // }
+      //   if (
+      //     document.querySelector(
+      //       "." +
+      //         (String.fromCharCode(yCord.charCodeAt(0) + 1) +
+      //           "-" +
+      //           (JSON.parse(xCord) + 1)) +
+      //         ""
+      //     ).children.length != 0
+      //   ) {
+      //     array.push(
+      //       firstEvent.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName(
+      //         String.fromCharCode(yCord.charCodeAt(0) + 1) +
+      //           "-" +
+      //           (JSON.parse(xCord) + 1)
+      //       )[0]
+      //     );
+      //   }
+      //   if (
+      //     document.querySelector(
+      //       "." +
+      //         (String.fromCharCode(yCord.charCodeAt(0) + 1) +
+      //           "-" +
+      //           (JSON.parse(xCord) - 1)) +
+      //         ""
+      //     ).children.length != 0
+      //   ) {
+      //     array.push(
+      //       firstEvent.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName(
+      //         String.fromCharCode(yCord.charCodeAt(0) + 1) +
+      //           "-" +
+      //           (JSON.parse(xCord) - 1)
+      //       )[0]
+      //     );
+      //   }
+      // } else {
+      //   let availSpace = firstEvent.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName(
+      //     String.fromCharCode(yCord.charCodeAt(0) - 1) + "-" + xCord
+      //   );
+      //   array = [availSpace[0]];
+
+      //   if (yCord === "G") {
+      //     array.push(
+      //       firstEvent.target.parentNode.parentNode.parentNode.parentNode.getElementsByClassName(
+      //         String.fromCharCode(yCord.charCodeAt(0) - 2) + "-" + xCord
+      //       )[0]
+      //     );
+      //   }
+
+      //   console.log(
+      //     "hi",
+      //     document.querySelector(
+      //       "." +
+      //         (String.fromCharCode(yCord.charCodeAt(0) - 1) +
+      //           "-" +
+      //           (JSON.parse(xCord) + 1))
+      //     ) + ""
+      //   );
+      //   console.log(
+      //     "hi",
+      //     "." +
+      //       (String.fromCharCode(yCord.charCodeAt(0) - 1) +
+      //         "-" +
+      //         (JSON.parse(xCord) + 1)) +
+      //       ""
+      //   );
+      }
+
+      addSelectedTilesListener(array, firstEvent.target.parentNode);
+    });
+  }
 }
 function setUpPawn() {
   var x = document.querySelectorAll("[class$='pawn']");
@@ -164,6 +279,7 @@ function addPieceToTile(select, piece, anon) {
 // }
 function init() {
   setUpPawn();
+  setUpRook();
 }
 
 function removeSelectedTiles(anon) {
